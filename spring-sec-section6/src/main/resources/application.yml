@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ${SPRING_APP_NAME:spring-sec-section4}
+    name: ${SPRING_APP_NAME:spring-sec-section6}
     username: Kung fu Panda
   data:
     mongodb:

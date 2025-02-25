@@ -1,7 +1,7 @@
 spring:
   application:
-    name: ${SPRING_APP_NAME:spring-sec-section4}
-    username: Kung fu Panda
+    name: ${SPRING_APP_NAME:spring-sec-section6}
+    username: KUNG FU PANDA-DEV
   data:
     mongodb:
       host: ${DB_SERVER_HOST:localhost}
