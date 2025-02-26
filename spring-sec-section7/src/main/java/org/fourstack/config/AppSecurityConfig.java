@@ -1,5 +1,7 @@
 package org.fourstack.config;
 
+import org.fourstack.service.CustomAccessDeniedHandler;
+import org.fourstack.service.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,7 +26,8 @@ public class AppSecurityConfig {
                     requests.requestMatchers("/api/v1/contact", "/api/v1/notices", "/welcome", "/error", "/register").permitAll()
                             .anyRequest().authenticated())
             .formLogin(Customizer.withDefaults())
-            .httpBasic(Customizer.withDefaults())
+            .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
+            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()))
             .build();
   }
 

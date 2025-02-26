@@ -1,5 +1,6 @@
 package org.fourstack.service;
 
+import lombok.RequiredArgsConstructor;
 import org.fourstack.dao.CustomerInfoRepository;
 import org.fourstack.entity.CustomerInfo;
 import org.fourstack.entity.LoginUserDetails;
@@ -12,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserManagingService {
 
-  @Autowired
-  private CustomerInfoRepository repository;
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+
+  private final CustomerInfoRepository repository;
+  private final PasswordEncoder passwordEncoder;
 
   public void createNewUser(LoginUserDetails userDetails) {
     if (!userExists(userDetails.getUsername())) {
