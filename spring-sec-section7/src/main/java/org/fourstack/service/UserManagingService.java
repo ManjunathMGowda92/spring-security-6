@@ -5,7 +5,6 @@ import org.fourstack.dao.CustomerInfoRepository;
 import org.fourstack.entity.CustomerInfo;
 import org.fourstack.entity.LoginUserDetails;
 import org.fourstack.exception.UserAlreadyExistException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.fourstack.springsecsection1.controller;
+package org.fourstack.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
