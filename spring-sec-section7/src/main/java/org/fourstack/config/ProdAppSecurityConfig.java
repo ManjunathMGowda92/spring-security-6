@@ -20,7 +20,8 @@ public class ProdAppSecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http.requiresChannel(rcc -> rcc.anyRequest().requiresSecure()) // Accepts only https in Prod Environment
+    return http.sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(1).maxSessionsPreventsLogin(true))
+            .requiresChannel(rcc -> rcc.anyRequest().requiresSecure()) // Accepts only https in Prod Environment
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests ->
                     requests.requestMatchers("/api/v1/contact", "/api/v1/notices", "/welcome", "/error", "/register").permitAll()

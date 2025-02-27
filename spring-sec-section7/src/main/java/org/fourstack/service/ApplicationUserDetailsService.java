@@ -25,7 +25,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<CustomerInfo> optionalCustomerInfo = customerRepository.findByEmailIgnoreCase(username);
-    CustomerInfo customerInfo = optionalCustomerInfo.orElseThrow(() -> new UsernameNotFoundException(username));
+    CustomerInfo customerInfo = optionalCustomerInfo.orElseThrow(() -> new UsernameNotFoundException("No user found for :" + username));
     return User.builder()
             .username(customerInfo.getEmail())
             .password(customerInfo.getPwd())

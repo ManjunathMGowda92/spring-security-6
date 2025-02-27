@@ -9,6 +9,7 @@ import org.springframework.security.authentication.password.CompromisedPasswordC
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,7 +21,10 @@ public class AppSecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http.requiresChannel(rcc -> rcc.anyRequest().requiresInsecure())
+    return http.sessionManagement(smc -> smc.sessionFixation(sfc -> sfc.newSession())
+                    .invalidSessionUrl("/invalidSession")
+                    .maximumSessions(3).maxSessionsPreventsLogin(true))
+            .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests ->
                     requests.requestMatchers("/api/v1/contact", "/api/v1/notices", "/welcome", "/error", "/register").permitAll()
